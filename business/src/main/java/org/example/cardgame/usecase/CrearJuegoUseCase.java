@@ -1,5 +1,4 @@
 package org.example.cardgame.usecase;
-
 import co.com.sofka.domain.generic.DomainEvent;
 import org.example.cardgame.Juego;
 import org.example.cardgame.JugadorFactory;
@@ -9,7 +8,6 @@ import org.example.cardgame.gateway.model.CartaMaestra;
 import org.example.cardgame.values.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -27,7 +25,7 @@ public class CrearJuegoUseCase extends UseCaseForCommand<CrearJuegoCommand> {
         return listaDeCartaService.obtenerCartasDeMarvel().collectList()
                 .flatMapMany(cartas -> input.flatMapIterable(command -> {
 
-                    //TODO: validaciones del comando
+
                     var factory = new JugadorFactory();
                     command.getJugadores()
                             .forEach((id, alias) ->
@@ -57,7 +55,5 @@ public class CrearJuegoUseCase extends UseCaseForCommand<CrearJuegoCommand> {
         }));
         return new Mazo(new HashSet<>(lista));
     }
-
-
 
 }
